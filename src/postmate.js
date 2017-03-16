@@ -231,8 +231,6 @@ class Postmate {
 
     this.parent = window;
     this.frame = document.createElement('iframe');
-    (container || document.body).appendChild(this.frame);
-    this.child = this.frame.contentWindow || this.frame.contentDocument.parentWindow;
     this.model = model || {};
 
     return this.sendHandshake(url);
@@ -280,6 +278,8 @@ class Postmate {
       }
 
       log('Parent: Loading frame', { url });
+      (container || document.body).appendChild(this.frame);
+      this.child = this.frame.contentWindow || this.frame.contentDocument.parentWindow;
       this.frame.src = url;
     });
   }
